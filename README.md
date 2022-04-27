@@ -4,4 +4,4 @@
 - Backup
 
 ## Схема сборки проекта
-![]()
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-27%2017-27-26.png)
