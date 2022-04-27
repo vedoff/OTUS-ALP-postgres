@@ -33,4 +33,4 @@ select
 `create table t2 as 
 select 
   generate_series(1,10) as id,
-  md5(random()::text)::char(5) as data;`
+  md5(random()::text)::char(10) as data;`
