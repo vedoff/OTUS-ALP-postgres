@@ -23,7 +23,7 @@
 6. Переходим в созданную нами базу \
 `\c mybase`
 
-7. Создаем таблицу t1 
+7. Создаем таблицу t1 \
 `create table t1 as 
 select 
   generate_series(1,10) as id,
