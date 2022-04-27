@@ -1,0 +1,4 @@
+---
+# tasks file for postgre
+- name: import install-postgre.yml
+  import_tasks: install-postgre.yml

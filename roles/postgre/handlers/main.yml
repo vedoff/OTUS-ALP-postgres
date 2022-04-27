@@ -1,0 +1,7 @@
+---
+# handlers file for postgre
+- name: start postgre
+  systemd:
+    name: postgresql-14
+    enabled: yes
+    state: started
