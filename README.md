@@ -15,18 +15,25 @@
 `pg_createcluster -d /var/lib/postgresql/14/main 14 main` 
 3. Проверяем \
 `pg_lsclusters` 
-4. Разрешаем доступ для синхронизации с определенных ip
-`vi /etc/postgresql/14/main/pg_hba.conf`
-`host    replication    postgres    192.168.56.41/32   trust`
-`host    replication    postgres    192.168.56.42/32   trust`
+
+4. Разрешаем доступ для синхронизации с определенных ip \
+`vi /etc/postgresql/14/main/pg_hba.conf` 
+
+`host    replication    postgres    192.168.56.41/32   trust` \
+`host    replication    postgres    192.168.56.42/32   trust` 
+
 Разрешаем слушать postgres на внешнем ip (локальная сеть) \
-`vi /etc/postgresql/14/main/postgresql.conf` \
+`vi /etc/postgresql/14/main/postgresql.conf` 
+
 `listen_addresses = 'localhost, 192.168.56.40'`
+
 5. Стартуем кластер \
-`pg_ctlcluster 14 main start` 
+`pg_ctlcluster 14 main start`
+
 6. Подключаемся и создаем базу \
 `psql` \
-`create database mybase;` 
+`create database mybase;`
+
 7. Переходим в созданную нами базу \
 `\c mybase`
 
