@@ -28,7 +28,7 @@ select
   generate_series(1,10) as id,
   md5(random()::text)::char(10) as data;`
 
-#### Создаем таблицу test2
+#### Создаем таблицу t2
 
 `create table t2 as 
 select 
