@@ -44,7 +44,8 @@ select
 #### 12. Задаем пароль на подключение (123456) \
 `\password`
 
-## --создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
+## Повторяем шаги с 1-10 для srv02 в места пункта 11 
+###  создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
 `CREATE SUBSCRIPTION t1_sub1
 CONNECTION 'host=192.168.56.40 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t1_pub WITH (copy_data = false);`
