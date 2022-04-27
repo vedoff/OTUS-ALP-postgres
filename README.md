@@ -21,7 +21,7 @@
 `psql` \
 `create database mybase;` 
 6. Переходим в созданную нами базу \
-`\с mybase`
+`\c mybase`
 
 7. Создаем таблицу t1 
 `create table t1 as 
