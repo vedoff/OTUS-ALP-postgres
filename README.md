@@ -27,6 +27,9 @@
 
 `listen_addresses = 'localhost, 192.168.56.40'`
 
+Перезапускаем службу postgresql \
+sudo systemctl restart postgresql*
+
 5. Стартуем кластер \
 `pg_ctlcluster 14 main start`
 
@@ -82,4 +85,5 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 
 `listen_addresses = 'localhost, 192.168.56.41'`
 
-
+Перезапускаем службу postgresql \
+sudo systemctl restart postgresql*
