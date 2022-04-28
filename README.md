@@ -112,7 +112,7 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 Разрешаем слушать postgres на внешнем ip (локальная сеть) \
 `vi /etc/postgresql/14/main/postgresql.conf` 
 
-`listen_addresses = 'localhost, 192.168.56.43'`
+`listen_addresses = 'localhost, 192.168.56.42'`
 
 Перезапускаем службу postgresql \
 Переходим под пользователя с правами `sudo` в нашем случае `vagrant` \
@@ -130,8 +130,28 @@ CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=my
 PUBLICATION t2_pub WITH (copy_data = false);`
 
 ## Конфигурирование сервера реплики backup
+Разрешаем доступ для синхронизации с определенных ip \
+`vi /etc/postgresql/14/main/pg_hba.conf` 
 
+`host    all    all    192.168.56.42/32   trust` \
 
+Разрешаем слушать postgres на внешнем ip (локальная сеть) \
+`vi /etc/postgresql/14/main/postgresql.conf` 
+
+`listen_addresses = 'localhost, 192.168.56.43'`
+
+Удаляем данные из кластера, таким образом подготавливаем его в синхронизации \
+`rm -rf /var/lib/postgresql/14/main`
+
+Восстанавливаем папку базы `main` \
+`cd /var/lib/postgresql/14/` \
+`mkdir main` \
+
+### Запускаем синхронизацию
+`pg_basebackup -P -R -X stream -c fast -h 192.168.56.42 -U postgres -D ./main`
+
+В этой команде есть важный параметр -R. Он означает, что PostgreSQL-сервер также создаст пустой файл standby.signal. \
+Несмотря на то, что файл пустой, само наличие этого файла означает, что этот сервер — реплика.
 
 
 
