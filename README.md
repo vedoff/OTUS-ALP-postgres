@@ -104,7 +104,10 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 `vi /etc/postgresql/14/main/pg_hba.conf` 
 
 `host    all    all    192.168.56.40/32   trust` \
-`host    all    all    192.168.56.41/32   trust` 
+`host    all    all    192.168.56.41/32   trust` \
+
+Так же дописывам в конец \
+`host    replication    postgres    192.168.56.43/32    md5` 
 
 Разрешаем слушать postgres на внешнем ip (локальная сеть) \
 `vi /etc/postgresql/14/main/postgresql.conf` 
@@ -125,3 +128,10 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 `CREATE SUBSCRIPTION t2_sub_srv02_to_srv03
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
+
+## Конфигурирование сервера реплики backup
+
+
+
+
+
