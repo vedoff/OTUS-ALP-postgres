@@ -87,3 +87,11 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 
 Перезапускаем службу postgresql \
 sudo systemctl restart postgresql*
+
+#### Перейдем на сервер srv01 и выполним подписку на таблицу `t2` `srv02`
+###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
+`CREATE SUBSCRIPTION t2_sub1
+CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
+PUBLICATION t2_pub WITH (copy_data = false);`
+
+
