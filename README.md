@@ -58,8 +58,28 @@ select
 #### 13. Задаем пароль на подключение (123456)
 `\password`
 
-## Повторяем шаги с 1-11 и 13 для srv02 в места пункта 12
-###  создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
+## Повторяем шаги с 1-11 и 13 для `srv02` в места пункта 12 для `t1` ->
+###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
 `CREATE SUBSCRIPTION t1_sub1
 CONNECTION 'host=192.168.56.40 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t1_pub WITH (copy_data = false);`
+
+## Создадим публикацию для `srv02` `t2` и подписку на эту таблицу на сервере srv01 
+Заходим на сервер \
+`vagrant ssh srv02` \
+`sudo su - postgres` 
+`\c mybase` \
+`CREATE PUBLICATION t1_pub FOR TABLE t2;`
+
+Разрешаем доступ для синхронизации с определенных ip \
+`vi /etc/postgresql/14/main/pg_hba.conf` 
+
+`host    replication    postgres    192.168.56.40/32   trust` \
+`host    replication    postgres    192.168.56.42/32   trust` 
+
+Разрешаем слушать postgres на внешнем ip (локальная сеть) \
+`vi /etc/postgresql/14/main/postgresql.conf` 
+
+`listen_addresses = 'localhost, 192.168.56.41'`
+
+
