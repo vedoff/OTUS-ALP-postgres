@@ -86,7 +86,9 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 `listen_addresses = 'localhost, 192.168.56.41'`
 
 Перезапускаем службу postgresql \
-sudo systemctl restart postgresql*
+Переходим под пользователя с правами `sudo` в нашем случае `vagrant`
+`ctrl d`
+`sudo systemctl restart postgresql*`
 
 #### Перейдем на сервер srv01 и выполним подписку на таблицу `t2` `srv02`
 ###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
