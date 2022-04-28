@@ -117,11 +117,11 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 `sudo systemctl restart postgresql*`
 
 ###  -> создадим подписку на сервер `srv01`
-`CREATE SUBSCRIPTION t1_sub_srv01
+`CREATE SUBSCRIPTION t1_sub_srv01_to_srv03
 CONNECTION 'host=192.168.56.40 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t1_pub WITH (copy_data = false);`
 
 ###  -> создадим подписку на сервер `srv02`
-`CREATE SUBSCRIPTION t2_sub_srv02
+`CREATE SUBSCRIPTION t2_sub_srv02_to_srv03
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
