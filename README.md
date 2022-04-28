@@ -94,4 +94,17 @@ sudo systemctl restart postgresql*
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
 
+## Конфигурирование srv03 
+#### Повторим настройку ноды как для srv01/srv02
+Пункт 4 для srv03
 
+4. Разрешаем доступ для синхронизации с определенных ip \
+`vi /etc/postgresql/14/main/pg_hba.conf` 
+
+`host    replication    postgres    192.168.56.40/32   trust` \
+`host    replication    postgres    192.168.56.41/32   trust` 
+
+Разрешаем слушать postgres на внешнем ip (локальная сеть) \
+`vi /etc/postgresql/14/main/postgresql.conf` 
+
+`listen_addresses = 'localhost, 192.168.56.43'`
