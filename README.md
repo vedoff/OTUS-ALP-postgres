@@ -67,7 +67,7 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 ## Создадим публикацию для `srv02` `t2` и подписку на эту таблицу на сервере srv01 
 Заходим на сервер \
 `vagrant ssh srv02` \
-`sudo su - postgres` 
+`sudo su - postgres` \
 `\c mybase` \
 `CREATE PUBLICATION t1_pub FOR TABLE t2;`
 
