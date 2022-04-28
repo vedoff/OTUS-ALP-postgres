@@ -63,7 +63,7 @@ select
 
 ## Повторяем шаги с 1-11 и 13 для `srv02` в места пункта 12 для `t1` ->
 ###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
-`CREATE SUBSCRIPTION t1_sub1
+`CREATE SUBSCRIPTION t1_sub_srv01
 CONNECTION 'host=192.168.56.40 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t1_pub WITH (copy_data = false);`
 
@@ -90,7 +90,7 @@ sudo systemctl restart postgresql*
 
 #### Перейдем на сервер srv01 и выполним подписку на таблицу `t2` `srv02`
 ###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
-`CREATE SUBSCRIPTION t2_sub1
+`CREATE SUBSCRIPTION t2_sub_srv02
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
 
