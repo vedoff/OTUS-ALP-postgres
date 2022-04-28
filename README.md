@@ -37,13 +37,13 @@
 7. Переходим в созданную нами базу \
 `\c mybase`
 
-8. Создаем таблицу t1 \
+8. Создаем таблицу `t1` \
 `create table t1 as 
 select 
   generate_series(1,10) as id,
   md5(random()::text)::char(10) as data;`
   
-9. Создаем таблицу t2 \
+9. Создаем таблицу `t2` \
 `create table t2 as 
 select 
   generate_series(1,10) as id,
@@ -55,7 +55,7 @@ select
 #### 12. Создаем подписку на таблицу `t1`
 `CREATE PUBLICATION t1_pub FOR TABLE t1;`
 
-#### 13. Задаем пароль на подключение (123456) \
+#### 13. Задаем пароль на подключение (123456)
 `\password`
 
 ## Повторяем шаги с 1-11 и 13 для srv02 в места пункта 12
