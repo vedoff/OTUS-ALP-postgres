@@ -69,7 +69,7 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 `vagrant ssh srv02` \
 `sudo su - postgres` \
 `\c mybase` \
-`CREATE PUBLICATION t1_pub FOR TABLE t2;`
+`CREATE PUBLICATION t2_pub FOR TABLE t2;`
 
 Разрешаем доступ для синхронизации с определенных ip \
 `vi /etc/postgresql/14/main/pg_hba.conf` 
