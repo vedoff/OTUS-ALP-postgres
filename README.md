@@ -31,7 +31,7 @@
 `listen_addresses = 'localhost, 192.168.56.40'`
 
 Перезапускаем службу postgresql \
-`ctrl d`
+`ctrl d` \
 `sudo systemctl restart postgresql*`
 
 Проверяем что postgres слушает на локальном адресе и указано порту (5432) \
