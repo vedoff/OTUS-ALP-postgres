@@ -4,13 +4,12 @@
 - Backup
 
 ## Схема сборки проекта
-![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-27%2017-27-26.png)
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-15-25.png)
 
 ### Установка postgres на ноды.
-`ansible-playbook play.yml`
+`vagrant up && ansible-playbook play.yml`
 
 # Конфигурирование srv01
-`vagrant up` 
 1. Заходим на сервер \
 `vagrant ssh srv01` \
 `sudo su - postgres` 
@@ -63,7 +62,7 @@ select
 ### 11. Обязательно рестартуем кластер
 `ctrl d` \
 `sudo pg_ctlcluster 14 main restart`
-#### 12. Создаем подписку на таблицу `t1`
+#### 12. Создаем публикацию на таблицу `t1`
 `sudo su - postgres` \
 `psql` \
 `\c mybase` \
