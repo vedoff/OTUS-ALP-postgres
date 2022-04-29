@@ -31,13 +31,14 @@
 `listen_addresses = 'localhost, 192.168.56.40'`
 
 Перезапускаем службу postgresql \
+`ctrl d`
 `sudo systemctl restart postgresql*`
 
 Проверяем что postgres слушает на локальном адресе и указано порту (5432) \
 `ss -tunlp`
 
-5. Стартуем кластер \
-`pg_ctlcluster 14 main start`
+5. переходим обратно в кластер \
+`sudo su - postgres`
 
 6. Подключаемся и создаем базу \
 `psql` \
