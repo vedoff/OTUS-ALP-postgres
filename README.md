@@ -14,7 +14,7 @@
 1. Заходим на сервер \
 `vagrant ssh srv01` \
 `sudo su - postgres` 
-2. Создаем кластер \
+2. Создаем кластер если он не создан при установке\
 `pg_createcluster -d /var/lib/postgresql/14/main 14 main` 
 3. Проверяем \
 `pg_lsclusters` 
@@ -31,7 +31,10 @@
 `listen_addresses = 'localhost, 192.168.56.40'`
 
 Перезапускаем службу postgresql \
-sudo systemctl restart postgresql*
+`sudo systemctl restart postgresql*`
+
+Проверяем что postgres слушает на локальном адресе и указано порту (5432) \
+`ss -tunlp`
 
 5. Стартуем кластер \
 `pg_ctlcluster 14 main start`
