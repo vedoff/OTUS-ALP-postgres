@@ -61,8 +61,11 @@ select
 #### 10. Включаем wal_level для потоковой синхронизации (по дефолту установлена replica)
 `ALTER SYSTEM SET wal_level = logical;`
 ### 11. Обязательно рестартуем кластер
-`pg_ctlcluster 14 main restart`
+`ctrl d` \
+`sudo pg_ctlcluster 14 main restart`
 #### 12. Создаем подписку на таблицу `t1`
+`sudo su - postgres` \
+`psql` \
 `CREATE PUBLICATION t1_pub FOR TABLE t1;`
 
 #### 13. Задаем пароль на подключение (123456)
