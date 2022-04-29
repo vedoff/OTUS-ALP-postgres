@@ -148,7 +148,7 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 Разрешаем доступ для синхронизации с определенных ip \
 `vi /etc/postgresql/14/main/pg_hba.conf` 
 
-`host    all    all    192.168.56.42/32   trust` 
+`host    all    all    192.168.56.42/32   md5` 
 
 Разрешаем слушать postgres на внешнем ip (локальная сеть) \
 `vi /etc/postgresql/14/main/postgresql.conf` 
@@ -168,7 +168,7 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 `chmod go-rwx main` 
 
 ### Запускаем синхронизацию
-`pg_basebackup -P -R -X stream -c fast -h 192.168.56.42 -U postgres -D ./main`
+`pg_basebackup -P -R -X stream -c fast -h 192.168.56.42 -D main`
 
 В этой команде есть важный параметр -R. Он означает, что PostgreSQL-сервер также создаст пустой файл standby.signal. \
 Несмотря на то, что файл пустой, само наличие этого файла означает, что этот сервер — реплика.
