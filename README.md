@@ -6,6 +6,9 @@
 ## Схема сборки проекта
 ![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-27%2017-27-26.png)
 
+### Установка postgres на ноды.
+`ansible-playbook play.yml`
+
 ### Конфигурирование srv01
 `vagrant up` 
 1. Заходим на сервер \
@@ -90,7 +93,7 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 `ctrl d` \
 `sudo systemctl restart postgresql*`
 
-#### Перейдем на сервер srv01 и выполним подписку на таблицу `t2` `srv02`
+## Перейдем на сервер srv01 и выполним подписку на таблицу `t2` `srv02`
 ###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
 `CREATE SUBSCRIPTION t2_sub_srv02
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
@@ -104,7 +107,7 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 `vi /etc/postgresql/14/main/pg_hba.conf` 
 
 `host    all    all    192.168.56.40/32   trust` \
-`host    all    all    192.168.56.41/32   trust` \
+`host    all    all    192.168.56.41/32   trust` 
 
 Так же дописывам в конец \
 `host    replication    postgres    192.168.56.43/32    md5` 
@@ -116,7 +119,7 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 
 Перезапускаем службу postgresql \
 Переходим под пользователя с правами `sudo` в нашем случае `vagrant` \
-`ctrl d`
+`ctrl d` \
 `sudo systemctl restart postgresql*`
 
 ###  -> создадим подписку на сервер `srv01`
@@ -133,19 +136,19 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 Разрешаем доступ для синхронизации с определенных ip \
 `vi /etc/postgresql/14/main/pg_hba.conf` 
 
-`host    all    all    192.168.56.42/32   trust` \
+`host    all    all    192.168.56.42/32   trust` 
 
 Разрешаем слушать postgres на внешнем ip (локальная сеть) \
 `vi /etc/postgresql/14/main/postgresql.conf` 
 
 `listen_addresses = 'localhost, 192.168.56.43'`
 
-Удаляем данные из кластера, таким образом подготавливаем его в синхронизации \
+Удаляем данные из кластера, таким образом подготавливаем его к синхронизации \
 `rm -rf /var/lib/postgresql/14/main`
 
 Восстанавливаем папку базы `main` \
 `cd /var/lib/postgresql/14/` \
-`mkdir main` \
+`mkdir main` 
 
 ### Запускаем синхронизацию
 `pg_basebackup -P -R -X stream -c fast -h 192.168.56.42 -U postgres -D ./main`
