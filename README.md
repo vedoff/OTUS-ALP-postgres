@@ -110,6 +110,10 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 #### Проверим подписку
 SELECT * FROM pg_stat_subscription \gx
 
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-33-54.png)
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-34-49.png)
+
+
 # Конфигурирование srv03 
 #### Повторим настройку ноды как для srv01/srv02
 Пункт 4 для srv03
@@ -142,6 +146,8 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 `CREATE SUBSCRIPTION t2_sub_srv02_to_srv03
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
+### Результат
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-19-43.png)
 
 # Конфигурирование сервера реплики backup
 Разрешаем доступ для синхронизации с определенных ip \
@@ -163,14 +169,16 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 
 Обязательно высталяем права на каталог кластера, если будут выставлены права отличные от 700 или 750 то синхронизация не пройдет. \
 Будет выдана ошибка с рекомендациями о выставлении прав на каталог кластера баз данных. \
-![]()
-`chmod go-rwx main` 
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-11-50.png)
+
+## `chmod go-rwx main` 
 
 ### Запускаем синхронизацию
 `pg_basebackup -P -R -X stream -c fast -h 192.168.56.42 -D main`
 
 В этой команде есть важный параметр -R. Он означает, что PostgreSQL-сервер также создаст пустой файл standby.signal. \
 Несмотря на то, что файл пустой, само наличие этого файла означает, что этот сервер — реплика.
-
+### Результат
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-16-19.png)
 
 
