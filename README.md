@@ -179,6 +179,14 @@ PUBLICATION t2_pub WITH (copy_data = false);`
 В этой команде есть важный параметр -R. Он означает, что PostgreSQL-сервер также создаст пустой файл standby.signal. \
 Несмотря на то, что файл пустой, само наличие этого файла означает, что этот сервер — реплика.
 ### Результат
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2015-00-36.png)
 ![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-16-19.png)
+
+# Проверка работы схемы
+### После сборки была проведена проверка, путем добавления новой записи в таблицу `t1` базы `mybase` на сервере `srv01`
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-39-51.png)
+
+### Проверяем наличие записи на сервере backup, тем самым подтверждая, что схема работает.
+![](https://github.com/vedoff/postgres/blob/main/pict/Screenshot%20from%202022-04-29%2013-41-01.png)
 
 
