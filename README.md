@@ -9,7 +9,7 @@
 ### Установка postgres на ноды.
 `ansible-playbook play.yml`
 
-### Конфигурирование srv01
+# Конфигурирование srv01
 `vagrant up` 
 1. Заходим на сервер \
 `vagrant ssh srv01` \
@@ -66,12 +66,14 @@ select
 #### 12. Создаем подписку на таблицу `t1`
 `sudo su - postgres` \
 `psql` \
+`\c mybase` \
 `CREATE PUBLICATION t1_pub FOR TABLE t1;`
 
 #### 13. Задаем пароль на подключение (123456)
 `\password`
 
-## Повторяем шаги с 1-11 и 13 для `srv02` в места пункта 12 для `t1` ->
+# Конфигурирование srv02
+## Повторяем шаги с 1-3 5-11 и 13 для `srv02` в места пункта 12 для `t1` ->
 ###  -> создадим подписку к БД по Порту с Юзером и Паролем и Копированием данных=false
 `CREATE SUBSCRIPTION t1_sub_srv01
 CONNECTION 'host=192.168.56.40 port=5432 user=postgres password=123456 dbname=mybase' 
@@ -106,7 +108,10 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
 
-## Конфигурирование srv03 
+#### Проверим подписку
+SELECT * FROM pg_stat_subscription \gx
+
+# Конфигурирование srv03 
 #### Повторим настройку ноды как для srv01/srv02
 Пункт 4 для srv03
 
@@ -139,7 +144,7 @@ PUBLICATION t1_pub WITH (copy_data = false);`
 CONNECTION 'host=192.168.56.41 port=5432 user=postgres password=123456 dbname=mybase' 
 PUBLICATION t2_pub WITH (copy_data = false);`
 
-## Конфигурирование сервера реплики backup
+# Конфигурирование сервера реплики backup
 Разрешаем доступ для синхронизации с определенных ip \
 `vi /etc/postgresql/14/main/pg_hba.conf` 
 
